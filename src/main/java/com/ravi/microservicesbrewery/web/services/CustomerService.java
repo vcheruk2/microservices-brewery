@@ -8,4 +8,7 @@ import java.util.UUID;
    Created on: 5/24/2020 */
 public interface CustomerService {
     CustomerDto getCustomerById(UUID id);
+    CustomerDto createCustomer(CustomerDto customerDto);
+    void updateCustomerById(UUID id, CustomerDto customerDto);
+    void deleteById(UUID customerId);
 }

@@ -1,7 +1,10 @@
-package com.ravi.microservicesbrewery.web.controller;
+package com.ravi.microservicesbrewery.web.controller.v2;
 
-import com.ravi.microservicesbrewery.web.model.BeerDto;
-import com.ravi.microservicesbrewery.web.services.BeerService;
+/* Created by: Venkata Ravichandra Cherukuri
+   Created on: 5/24/2020 */
+
+import com.ravi.microservicesbrewery.web.model.v2.BeerDtoV2;
+import com.ravi.microservicesbrewery.web.services.v2.BeerServiceV2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,28 +12,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-/* Created by: Venkata Ravichandra Cherukuri
-   Created on: 5/24/2020 */
 @RestController
-@RequestMapping(BeerController.BASE_URL)
-public class BeerController {
+@RequestMapping(BeerControllerV2.BASE_URL)
+public class BeerControllerV2 {
 
-    private final BeerService beerService;
-    public static final String BASE_URL = "/api/v1/beer";
+    private final BeerServiceV2 beerService;
+    public static final String BASE_URL = "/api/v2/beer";
 
-    public BeerController(BeerService beerService) {
+    public BeerControllerV2(BeerServiceV2 beerService) {
         this.beerService = beerService;
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId){
+    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId){
         return new ResponseEntity<>( beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity createBeer(@RequestBody BeerDto beerDto){
+    public ResponseEntity createBeer(@RequestBody BeerDtoV2 beerDto){
 
-        BeerDto savedDto = beerService.createBeer(beerDto);
+        BeerDtoV2 savedDto = beerService.createBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
         // TODO: Add hostname to url
@@ -40,7 +41,7 @@ public class BeerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
+    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDtoV2 beerDto){
         beerService.updateBeer(beerId, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -50,6 +51,5 @@ public class BeerController {
     public void deleteById(@PathVariable("beerId") UUID beerId){
         beerService.deleteById(beerId);
     }
-
-
 }
+

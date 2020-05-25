@@ -17,4 +17,26 @@ public class CustomerServiceImpl implements CustomerService {
                 .name("Customer Name")
                 .build();
     }
+
+    @Override
+    public CustomerDto createCustomer(CustomerDto customerDto) {
+        return CustomerDto.builder()
+                .name(customerDto.getName())
+                .id(UUID.randomUUID())
+                .build();
+    }
+
+    @Override
+    public void updateCustomerById(UUID uuid, CustomerDto customerDto) {
+        // TODO: Implement this after implementing the service layer.
+        /*CustomerDto.builder()
+                .id(customerDto.getId())
+                .name(customerDto.getName())
+                .build();*/
+    }
+
+    @Override
+    public void deleteById(UUID customerId) {
+        // TODO: Implement this after implementing the service layer.
+    }
 }
